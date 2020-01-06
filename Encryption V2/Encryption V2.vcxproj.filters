@@ -18,5 +18,19 @@
     <ClCompile Include="Encryption V2.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Ceasar.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Vernam.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Ceasar.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Vernam.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

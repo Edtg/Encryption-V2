@@ -151,7 +151,13 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Ceasar.cpp" />
     <ClCompile Include="Encryption V2.cpp" />
+    <ClCompile Include="Vernam.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Ceasar.h" />
+    <ClInclude Include="Vernam.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
