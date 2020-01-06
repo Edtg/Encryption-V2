@@ -31,3 +31,19 @@ std::string Ceasar::GetKeyTable(int Key)
 	Table << Alphabet.substr(0, Alphabet.length() - Key);
 	return Table.str();
 }
+
+std::string Ceasar::BruteDecrypt(std::string EncryptedText, std::string LookingFor, int MaxAttempts)
+{
+	if (LookingFor.length() <= 3)
+		return "String To Look For is Too Short";
+
+	std::string DecryptedString;
+	for (int i = 0; i < MaxAttempts; i++)
+	{
+		DecryptedString = Ceasar::Decrypt(EncryptedText, i);
+		std::size_t Found = DecryptedString.find(LookingFor);
+		if (Found != std::string::npos)
+			return DecryptedString;
+	}
+	return "Unable To Decrypt";
+}

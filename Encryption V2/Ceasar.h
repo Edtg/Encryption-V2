@@ -10,8 +10,8 @@ public:
 
 	static std::string GetKeyTable(int Key);
 
-private:
+	static std::string BruteDecrypt(std::string EncryptedText, std::string LookingFor, int MaxAttempts);
 
-	std::string Aplhabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+private:
 
 };

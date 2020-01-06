@@ -8,11 +8,11 @@
 
 int main()
 {
-	std::string Text = Vernam::ProcessString("Hello World!", 5);
+	std::string Text = Ceasar::Encrypt("Hello World!", 5);
     std::cout << Text << std::endl;
-	std::cout << Vernam::ProcessString(Text, 5) << std::endl;
+	std::cout << Ceasar::BruteDecrypt(Text, "Hello", 100) << std::endl;
 
-	std::cout << Vernam::GetKeyTable(10);
+	//std::cout << Vernam::GetKeyTable(10);
 }
 
 // Run program: Ctrl + F5 or Debug > Start Without Debugging menu
