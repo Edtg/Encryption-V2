@@ -23,3 +23,33 @@ std::string Vernam::GetKeyTable(int Key)
 	}
 	return Table.str();
 }
+
+EncryptionPair Vernam::BruteDecrypt(std::string EncryptedString, std::string LookingFor, int MaxAttempts)
+{
+	EncryptionPair Output;
+	if (LookingFor.length() <= 3)
+	{
+		Output.Type = EncryptionType::UNKNOWN;
+		Output.Key = -2;
+		return Output;
+	}
+
+	Output.Type = EncryptionType::Vernam;
+
+	std::string DecryptedString;
+	for (int i = 0; i < MaxAttempts; i++)
+	{
+		DecryptedString = Vernam::ProcessString(EncryptedString, i);
+		std::size_t Found = DecryptedString.find(LookingFor);
+		if (Found != std::string::npos)
+		{
+			Output.Ciphertext = EncryptedString;
+			Output.Plaintext = DecryptedString;
+			Output.Key = i;
+			return Output;
+		}
+	}
+	Output.Type = EncryptionType::UNKNOWN;
+	Output.Key = -1;
+	return Output;
+}

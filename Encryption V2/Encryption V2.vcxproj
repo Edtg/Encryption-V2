@@ -157,6 +157,8 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Ceasar.h" />
+    <ClInclude Include="EncryptionPair.h" />
+    <ClInclude Include="EncryptionTypes.h" />
     <ClInclude Include="Vernam.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

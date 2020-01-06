@@ -1,5 +1,6 @@
 #pragma once
 #include <string>
+#include "EncryptionPair.h"
 
 class Ceasar
 {
@@ -10,7 +11,7 @@ public:
 
 	static std::string GetKeyTable(int Key);
 
-	static std::string BruteDecrypt(std::string EncryptedText, std::string LookingFor, int MaxAttempts);
+	static EncryptionPair BruteDecrypt(std::string EncryptedText, std::string LookingFor, int MaxAttempts);
 
 private:
 

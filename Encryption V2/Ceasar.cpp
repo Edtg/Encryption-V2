@@ -32,18 +32,32 @@ std::string Ceasar::GetKeyTable(int Key)
 	return Table.str();
 }
 
-std::string Ceasar::BruteDecrypt(std::string EncryptedText, std::string LookingFor, int MaxAttempts)
+EncryptionPair Ceasar::BruteDecrypt(std::string EncryptedString, std::string LookingFor, int MaxAttempts)
 {
+	EncryptionPair Output;
 	if (LookingFor.length() <= 3)
-		return "String To Look For is Too Short";
+	{
+		Output.Type = EncryptionType::UNKNOWN;
+		Output.Key = -2;
+		return Output;
+	}
+
+	Output.Type = EncryptionType::Ceasar;
 
 	std::string DecryptedString;
 	for (int i = 0; i < MaxAttempts; i++)
 	{
-		DecryptedString = Ceasar::Decrypt(EncryptedText, i);
+		DecryptedString = Ceasar::Decrypt(EncryptedString, i);
 		std::size_t Found = DecryptedString.find(LookingFor);
 		if (Found != std::string::npos)
-			return DecryptedString;
+		{
+			Output.Ciphertext = EncryptedString;
+			Output.Plaintext = DecryptedString;
+			Output.Key = i;
+			return Output;
+		}
 	}
-	return "Unable To Decrypt";
+	Output.Type = EncryptionType::UNKNOWN;
+	Output.Key = -1;
+	return Output;
 }
