@@ -66,7 +66,7 @@ int MainMenu()
 		{
 		case 1:
 			std::cout << "Enter a string to be encrypted:\n> ";
-			std::cin >> ToEncrypt;
+			std::cin >> ToEncrypt; // TODO: allow spaces in inputted string.
 			std::cout << "Enter a key to encrypt the string:\n> ";
 			Key = ValidateInt();
 			std::cout << "Encrypted String:\n" << Ceasar::Encrypt(ToEncrypt, Key) << "\n";
