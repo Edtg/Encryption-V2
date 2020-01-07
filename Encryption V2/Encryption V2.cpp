@@ -55,7 +55,10 @@ int MainMenu()
 	int EncryptionType;
 
 	std::string ToEncrypt;
+	std::string ToDecrypt;
+	std::string BruteLookFor;
 	int Key;
+	EncryptionPair Result;
 
 	switch (Option)
 	{
@@ -72,8 +75,19 @@ int MainMenu()
 			std::cout << "Encrypted String:\n" << Ceasar::Encrypt(ToEncrypt, Key) << "\n";
 			break;
 		case 2:
+			std::cout << "Enter a string to be decrypted:\n> ";
+			std::getline(std::cin, ToDecrypt);
+			std::cout << "Enter a key to decrypt the string:\n> ";
+			Key = ValidateInt();
+			std::cout << "Decrypted String:\n" << Ceasar::Decrypt(ToDecrypt, Key) << "\n";
 			break;
 		case 3:
+			std::cout << "Enter a string to be decrypted:\n> ";
+			std::getline(std::cin, ToDecrypt);
+			std::cout << "Enter a word that may appear in the decrypted string:\n> ";
+			std::getline(std::cin, BruteLookFor);
+			Result = Ceasar::BruteDecrypt(ToDecrypt, BruteLookFor);
+			std::cout << "Decrypted String:\n" << Result.Plaintext << "\nKey: " << Result.Key << "\n";
 			break;
 		case 4:
 			return 1;
