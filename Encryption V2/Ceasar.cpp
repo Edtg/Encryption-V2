@@ -1,6 +1,7 @@
 #include "Ceasar.h"
 #include <sstream>
 
+#define MAXATTEMPTS 500
 
 std::string Ceasar::Encrypt(std::string Plaintext, int Key)
 {
@@ -30,6 +31,11 @@ std::string Ceasar::GetKeyTable(int Key)
 	Table << Alphabet.substr(Alphabet.length() - Key, Key);
 	Table << Alphabet.substr(0, Alphabet.length() - Key);
 	return Table.str();
+}
+
+EncryptionPair Ceasar::BruteDecrypt(std::string EncryptedText, std::string LookingFor)
+{
+	return Ceasar::BruteDecrypt(EncryptedText, LookingFor, MAXATTEMPTS);
 }
 
 EncryptionPair Ceasar::BruteDecrypt(std::string EncryptedString, std::string LookingFor, int MaxAttempts)

@@ -8,24 +8,24 @@
 #include "Vernam.h"
 #include "EncryptionPair.h"
 
-int OptionMenu();
+int MainMenu();
 int OptionList(std::vector<std::string> Options);
 bool ValidateOption(int Option, int AmountOfOptions);
+int ValidateInt();
 
 int main()
 {
 	//std::string Text = Ceasar::Encrypt("Hello World!", 5);
     //std::cout << Text << std::endl;
-	//std::cout << Ceasar::BruteDecrypt(Text, "Hello", 100).Plaintext << std::endl;
-	while (OptionMenu() == 1)
-	{
-		
-	}
+	//std::cout << Ceasar::BruteDecrypt(Text, "Hello").Plaintext << std::endl;
+	while (MainMenu() == 1);
+
+
 	//std::cout << Vernam::GetKeyTable(10);
 }
 
 
-int OptionMenu()
+int MainMenu()
 {
 	std::cout << "Welcome to my encryption program.\nChoose 1 of the options below by entering the number then pressing enter.\n";
 	/*std::cout << "1) Ceasar Cipher\n";
@@ -52,16 +52,41 @@ int OptionMenu()
 
 	int Option = OptionList({ "Ceasar Cipher", "Vernam Cipher", "Key Pairs (WIP)", "Exit" });
 
+	int EncryptionType;
+
+	std::string ToEncrypt;
+	int Key;
+
 	switch (Option)
 	{
 	case 1:
-		std::cout << "Ceasar Cipher\n";
+		std::cout << "Ceasar Cipher\nSelect what to do with the cipher:\n";
+		EncryptionType = OptionList({ "Encrypt", "Decrypt", "Brute Crack", "Back" });
+		switch (EncryptionType)
+		{
+		case 1:
+			std::cout << "Enter a string to be encrypted:\n> ";
+			std::cin >> ToEncrypt;
+			std::cout << "Enter a key to encrypt the string:\n> ";
+			Key = ValidateInt();
+			std::cout << "Encrypted String:\n" << Ceasar::Encrypt(ToEncrypt, Key) << "\n";
+			break;
+		case 2:
+			break;
+		case 3:
+			break;
+		case 4:
+			return 1;
+			break;
+		}
 		break;
 	case 2:
-		std::cout << "Vernam Cipher\n";
+		std::cout << "Vernam Cipher\nSelect what to do with the cipher:\n";
+		EncryptionType = OptionList({ "Encrypt", "Decrypt" });
 		break;
 	case 3:
 		std::cout << "Key Pairs (WIP)\n";
+		EncryptionType = OptionList({ "Encrypt", "Decrypt" });
 		break;
 	case 4:
 		return 0;
@@ -107,6 +132,27 @@ bool ValidateOption(int Option, int AmountOfOptions)
 		std::cout << "Your input was not between 1 and " << AmountOfOptions << "\n";
 		return false;
 	}
+}
+
+int ValidateInt()
+{
+	std::string Input;
+	int Inputi;
+	bool IsValid = false;
+	while (!IsValid)
+	{
+		std::cin >> Input;
+		try
+		{
+			Inputi = std::stoi(Input);
+			IsValid = true;
+		}
+		catch (...)
+		{
+			IsValid = false;
+		}
+	}
+	return Inputi;
 }
 
 // Run program: Ctrl + F5 or Debug > Start Without Debugging menu

@@ -11,6 +11,7 @@ public:
 
 	static std::string GetKeyTable(int Key);
 
+	static EncryptionPair BruteDecrypt(std::string EncryptedText, std::string LookingFor);
 	static EncryptionPair BruteDecrypt(std::string EncryptedText, std::string LookingFor, int MaxAttempts);
 
 private:
