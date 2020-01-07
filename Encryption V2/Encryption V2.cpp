@@ -66,7 +66,7 @@ int MainMenu()
 		{
 		case 1:
 			std::cout << "Enter a string to be encrypted:\n> ";
-			std::cin >> ToEncrypt; // TODO: allow spaces in inputted string.
+			std::getline(std::cin, ToEncrypt);
 			std::cout << "Enter a key to encrypt the string:\n> ";
 			Key = ValidateInt();
 			std::cout << "Encrypted String:\n" << Ceasar::Encrypt(ToEncrypt, Key) << "\n";
@@ -107,7 +107,7 @@ int OptionList(std::vector<std::string> Options)
 	{
 		std::cout << "> ";
 		std::string Temp;
-		std::cin >> Temp;
+		std::getline(std::cin, Temp);
 		try
 		{
 			ChosenOption = std::stoi(Temp);
@@ -141,7 +141,7 @@ int ValidateInt()
 	bool IsValid = false;
 	while (!IsValid)
 	{
-		std::cin >> Input;
+		std::getline(std::cin, Input);
 		try
 		{
 			Inputi = std::stoi(Input);
