@@ -2,6 +2,7 @@
 //
 
 #include <iostream>
+#include <Windows.h>
 #include <string>
 #include <vector>
 #include "Ceasar.h"
@@ -12,6 +13,7 @@ int MainMenu();
 int OptionList(std::vector<std::string> Options);
 bool ValidateOption(int Option, int AmountOfOptions);
 int ValidateInt();
+void CopyToClipboard(std::string CopyText);
 
 int main()
 {
@@ -50,7 +52,7 @@ int MainMenu()
 		}
 	}*/
 
-	int Option = OptionList({ "Ceasar Cipher", "Vernam Cipher", "Key Pairs (WIP)", "Exit" });
+	int Option = OptionList({ "Ceasar Cipher", "Vernam Cipher", "RSA (WIP)", "Exit" });
 
 	int EncryptionType;
 
@@ -62,7 +64,7 @@ int MainMenu()
 
 	switch (Option)
 	{
-	case 1:
+	case 1: // Ceasar cipher
 		std::cout << "Ceasar Cipher\nSelect what to do with the cipher:\n";
 		EncryptionType = OptionList({ "Encrypt", "Decrypt", "Brute Crack", "Back" });
 		switch (EncryptionType)
@@ -73,6 +75,7 @@ int MainMenu()
 			std::cout << "Enter a key to encrypt the string:\n> ";
 			Key = ValidateInt();
 			std::cout << "Encrypted String:\n" << Ceasar::Encrypt(ToEncrypt, Key) << "\n";
+			CopyToClipboard(Ceasar::Encrypt(ToEncrypt, Key));
 			break;
 		case 2:
 			std::cout << "Enter a string to be decrypted:\n> ";
@@ -80,6 +83,7 @@ int MainMenu()
 			std::cout << "Enter a key to decrypt the string:\n> ";
 			Key = ValidateInt();
 			std::cout << "Decrypted String:\n" << Ceasar::Decrypt(ToDecrypt, Key) << "\n";
+			CopyToClipboard(Ceasar::Decrypt(ToDecrypt, Key));
 			break;
 		case 3:
 			std::cout << "Enter a string to be decrypted:\n> ";
@@ -88,21 +92,44 @@ int MainMenu()
 			std::getline(std::cin, BruteLookFor);
 			Result = Ceasar::BruteDecrypt(ToDecrypt, BruteLookFor);
 			std::cout << "Decrypted String:\n" << Result.Plaintext << "\nKey: " << Result.Key << "\n";
+			CopyToClipboard(Result.Plaintext);
 			break;
 		case 4:
 			return 1;
 			break;
 		}
 		break;
-	case 2:
+	case 2: // Vernam cipher
 		std::cout << "Vernam Cipher\nSelect what to do with the cipher:\n";
 		EncryptionType = OptionList({ "Encrypt", "Decrypt" });
+		switch (EncryptionType)
+		{
+		case 1:
+			std::cout << "Enter a string to be encrypted:\n> ";
+			std::getline(std::cin, ToEncrypt);
+			std::cout << "Enter a key to encrypt the string:\n> ";
+			Key = ValidateInt();
+			std::cout << "Encrypted String:\n" << Vernam::ProcessString(ToEncrypt, Key) << "\n";
+			CopyToClipboard(Vernam::ProcessString(ToEncrypt, Key));
+			break;
+		case 2:
+			std::cout << "Enter a string to be decrypted:\n> ";
+			std::getline(std::cin, ToDecrypt);
+			std::cout << "Enter a key to decrypt the string:\n> ";
+			Key = ValidateInt();
+			std::cout << "Decrypted String:\n" << Vernam::ProcessString(ToDecrypt, Key) << "\n";
+			CopyToClipboard(Vernam::ProcessString(ToDecrypt, Key));
+			break;
+		case 3:
+			return 1;
+			break;
+		}
 		break;
-	case 3:
-		std::cout << "Key Pairs (WIP)\n";
+	case 3: // RSA Encryption
+		std::cout << "RSA (WIP)\n";
 		EncryptionType = OptionList({ "Encrypt", "Decrypt" });
 		break;
-	case 4:
+	case 4: // Exit
 		return 0;
 		break;
 	}
@@ -167,6 +194,20 @@ int ValidateInt()
 		}
 	}
 	return Inputi;
+}
+
+void CopyToClipboard(std::string CopyText)
+{
+	const char* Copy = CopyText.c_str();
+	const size_t len = strlen(Copy) + 1;
+	HGLOBAL hMem = GlobalAlloc(GMEM_MOVEABLE, len);
+	memcpy(GlobalLock(hMem), Copy, len);
+	GlobalUnlock(hMem);
+	OpenClipboard(0);
+	EmptyClipboard();
+	SetClipboardData(CF_TEXT, hMem);
+	CloseClipboard();
+	return;
 }
 
 // Run program: Ctrl + F5 or Debug > Start Without Debugging menu
