@@ -153,12 +153,14 @@
   <ItemGroup>
     <ClCompile Include="Ceasar.cpp" />
     <ClCompile Include="Encryption V2.cpp" />
+    <ClCompile Include="RSA.cpp" />
     <ClCompile Include="Vernam.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Ceasar.h" />
     <ClInclude Include="EncryptionPair.h" />
     <ClInclude Include="EncryptionTypes.h" />
+    <ClInclude Include="RSA.h" />
     <ClInclude Include="Vernam.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

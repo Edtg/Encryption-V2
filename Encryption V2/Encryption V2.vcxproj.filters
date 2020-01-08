@@ -24,6 +24,9 @@
     <ClCompile Include="Vernam.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="RSA.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Ceasar.h">
@@ -36,6 +39,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="EncryptionTypes.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="RSA.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
