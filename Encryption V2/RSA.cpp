@@ -14,7 +14,7 @@ RSA::~RSA()
 
 void RSA::GetPrimes()
 {
-	p = 19;
+	p = 67;
 	q = 23;
 	n = p * q;
 }

@@ -30,27 +30,7 @@ int main()
 int MainMenu()
 {
 	std::cout << "Welcome to my encryption program.\nChoose 1 of the options below by entering the number then pressing enter.\n";
-	/*std::cout << "1) Ceasar Cipher\n";
-	std::cout << "2) Vernam Cipher\n";
-	std::cout << "3) Key Paris (WIP)\n";
-	std::cout << "4) Exit\n";
-	int ChosenOption = 0;
-	bool IsValidOption = false;
-	while (!IsValidOption)
-	{
-		std::cout << "> ";
-		std::string Temp;
-		std::cin >> Temp;
-		try
-		{
-			ChosenOption = std::stoi(Temp);
-			IsValidOption = ValidateOption(ChosenOption, 4);
-		}
-		catch(...)
-		{
-			std::cout << "Your input was not valid\n";
-		}
-	}*/
+	
 
 	int Option = OptionList({ "Ceasar Cipher", "Vernam Cipher", "RSA (WIP)", "Exit" });
 
@@ -201,12 +181,15 @@ void CopyToClipboard(std::string CopyText)
 	const char* Copy = CopyText.c_str();
 	const size_t len = strlen(Copy) + 1;
 	HGLOBAL hMem = GlobalAlloc(GMEM_MOVEABLE, len);
-	memcpy(GlobalLock(hMem), Copy, len);
-	GlobalUnlock(hMem);
-	OpenClipboard(0);
-	EmptyClipboard();
-	SetClipboardData(CF_TEXT, hMem);
-	CloseClipboard();
+	if (hMem > 0)
+	{
+		memcpy(GlobalLock(hMem), Copy, len);
+		GlobalUnlock(hMem);
+		OpenClipboard(0);
+		EmptyClipboard();
+		SetClipboardData(CF_TEXT, hMem);
+		CloseClipboard();
+	}
 	return;
 }
 
