@@ -32,7 +32,7 @@ int MainMenu()
 	std::cout << "Welcome to my encryption program.\nChoose 1 of the options below by entering the number then pressing enter.\n";
 	
 
-	int Option = OptionList({ "Ceasar Cipher", "Vernam Cipher", "RSA (WIP)", "Exit" });
+	int Option = OptionList({ "Ceasar Cipher", "Vernam Cipher", "RSA (WIP)", "SHA 256", "MD5", "Exit" });
 
 	int EncryptionType;
 
@@ -75,6 +75,12 @@ int MainMenu()
 			CopyToClipboard(Result.Plaintext);
 			break;
 		case 4:
+			// TODO Add SHA 256 Hashing algorithm.
+			break;
+		case 5:
+			// TODO Add MD5 hashing algorithm.
+			break;
+		case 6:
 			return 1;
 			break;
 		}
